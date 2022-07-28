@@ -35,5 +35,19 @@ service cloud.firestore {
       allow write: if true;
       allow delete: if true;
     }
+
+    match /course_journal/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
+
+    match /courses_record/{document} {
+      allow create: if true;
+      allow read: if true;
+      allow write: if true;
+      allow delete: if true;
+    }
   }
 }

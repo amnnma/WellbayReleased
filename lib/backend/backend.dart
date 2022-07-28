@@ -9,6 +9,8 @@ import 'schema/appointments_record.dart';
 import 'schema/podcast_record.dart';
 import 'schema/video_record.dart';
 import 'schema/authors_record.dart';
+import 'schema/course_journal_record.dart';
+import 'schema/courses_record_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -21,6 +23,8 @@ export 'schema/appointments_record.dart';
 export 'schema/podcast_record.dart';
 export 'schema/video_record.dart';
 export 'schema/authors_record.dart';
+export 'schema/course_journal_record.dart';
+export 'schema/courses_record_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord({
@@ -226,6 +230,90 @@ Future<FFFirestorePage<AuthorsRecord>> queryAuthorsRecordPage({
     queryCollectionPage(
       AuthorsRecord.collection,
       AuthorsRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query CourseJournalRecords (as a Stream and as a Future).
+Stream<List<CourseJournalRecord>> queryCourseJournalRecord({
+  Query Function(Query) queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      CourseJournalRecord.collection,
+      CourseJournalRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<CourseJournalRecord>> queryCourseJournalRecordOnce({
+  Query Function(Query) queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      CourseJournalRecord.collection,
+      CourseJournalRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<CourseJournalRecord>> queryCourseJournalRecordPage({
+  Query Function(Query) queryBuilder,
+  DocumentSnapshot nextPageMarker,
+  int pageSize,
+  bool isStream,
+}) =>
+    queryCollectionPage(
+      CourseJournalRecord.collection,
+      CourseJournalRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
+
+/// Functions to query CoursesRecordRecords (as a Stream and as a Future).
+Stream<List<CoursesRecordRecord>> queryCoursesRecordRecord({
+  Query Function(Query) queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      CoursesRecordRecord.collection,
+      CoursesRecordRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<CoursesRecordRecord>> queryCoursesRecordRecordOnce({
+  Query Function(Query) queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      CoursesRecordRecord.collection,
+      CoursesRecordRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<CoursesRecordRecord>> queryCoursesRecordRecordPage({
+  Query Function(Query) queryBuilder,
+  DocumentSnapshot nextPageMarker,
+  int pageSize,
+  bool isStream,
+}) =>
+    queryCollectionPage(
+      CoursesRecordRecord.collection,
+      CoursesRecordRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,
