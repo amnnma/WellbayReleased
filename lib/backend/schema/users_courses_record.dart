@@ -21,11 +21,11 @@ abstract class UsersCoursesRecord
   int get progress;
 
   @nullable
-  @BuiltValueField(wireName: 'DUPnumberOfLessons')
-  bool get dUPnumberOfLessons;
+  bool get courseFinished;
 
   @nullable
-  bool get courseFinished;
+  @BuiltValueField(wireName: 'DUPnumberOfLessons')
+  int get dUPnumberOfLessons;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -33,8 +33,8 @@ abstract class UsersCoursesRecord
 
   static void _initializeBuilder(UsersCoursesRecordBuilder builder) => builder
     ..progress = 0
-    ..dUPnumberOfLessons = false
-    ..courseFinished = false;
+    ..courseFinished = false
+    ..dUPnumberOfLessons = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users_courses');
@@ -62,8 +62,8 @@ Map<String, dynamic> createUsersCoursesRecordData({
   DocumentReference userRef,
   DocumentReference refCourse,
   int progress,
-  bool dUPnumberOfLessons,
   bool courseFinished,
+  int dUPnumberOfLessons,
 }) =>
     serializers.toFirestore(
         UsersCoursesRecord.serializer,
@@ -71,5 +71,5 @@ Map<String, dynamic> createUsersCoursesRecordData({
           ..userRef = userRef
           ..refCourse = refCourse
           ..progress = progress
-          ..dUPnumberOfLessons = dUPnumberOfLessons
-          ..courseFinished = courseFinished));
+          ..courseFinished = courseFinished
+          ..dUPnumberOfLessons = dUPnumberOfLessons));
