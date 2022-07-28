@@ -6,7 +6,12 @@ import 'podcast_record.dart';
 import 'video_record.dart';
 import 'authors_record.dart';
 import 'course_journal_record.dart';
-import 'courses_record_record.dart';
+import 'courses_record.dart';
+import 'gratitude_journal_record.dart';
+import 'live_sessions_record.dart';
+import 'mindfulness_sessions_record.dart';
+import 'user_searches_record.dart';
+import 'users_courses_record.dart';
 
 import 'index.dart';
 
@@ -23,7 +28,12 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   VideoRecord,
   AuthorsRecord,
   CourseJournalRecord,
-  CoursesRecordRecord,
+  CoursesRecord,
+  GratitudeJournalRecord,
+  LiveSessionsRecord,
+  MindfulnessSessionsRecord,
+  UserSearchesRecord,
+  UsersCoursesRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())
