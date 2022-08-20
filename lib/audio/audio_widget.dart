@@ -62,7 +62,7 @@ class _AudioWidgetState extends State<AudioWidget> {
                         audio: Audio.network(
                           listViewPodcastRecord.podcastpath!,
                           metas: Metas(
-                            id: 'df3hg_-kcf3grh0',
+                            id: 'df3hg_-n23iul9s',
                           ),
                         ),
                         titleTextStyle:
