@@ -17,10 +17,11 @@ class _$LiveSessionsRecordSerializer
   final String wireName = 'LiveSessionsRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, LiveSessionsRecord object,
+  Iterable<Object?> serialize(
+      Serializers serializers, LiveSessionsRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.sessionName;
     if (value != null) {
       result
@@ -90,74 +91,74 @@ class _$LiveSessionsRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   LiveSessionsRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new LiveSessionsRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'sessionName':
           result.sessionName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'sessionDescription':
           result.sessionDescription = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'sessionTherapist':
           result.sessionTherapist = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'sessionHowPrepare':
           result.sessionHowPrepare = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'sessionScienceBehind':
           result.sessionScienceBehind = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'sessionAgenda':
           result.sessionAgenda = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'sessionZoomLink':
           result.sessionZoomLink = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'sessionImage':
           result.sessionImage = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'sessionLengthMinutes':
           result.sessionLengthMinutes = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'sessionImageEntry':
           result.sessionImageEntry = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -168,30 +169,30 @@ class _$LiveSessionsRecordSerializer
 
 class _$LiveSessionsRecord extends LiveSessionsRecord {
   @override
-  final String sessionName;
+  final String? sessionName;
   @override
-  final String sessionDescription;
+  final String? sessionDescription;
   @override
-  final String sessionTherapist;
+  final String? sessionTherapist;
   @override
-  final String sessionHowPrepare;
+  final String? sessionHowPrepare;
   @override
-  final String sessionScienceBehind;
+  final String? sessionScienceBehind;
   @override
-  final String sessionAgenda;
+  final String? sessionAgenda;
   @override
-  final String sessionZoomLink;
+  final String? sessionZoomLink;
   @override
-  final String sessionImage;
+  final String? sessionImage;
   @override
-  final int sessionLengthMinutes;
+  final int? sessionLengthMinutes;
   @override
-  final String sessionImageEntry;
+  final String? sessionImageEntry;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
   factory _$LiveSessionsRecord(
-          [void Function(LiveSessionsRecordBuilder) updates]) =>
+          [void Function(LiveSessionsRecordBuilder)? updates]) =>
       (new LiveSessionsRecordBuilder()..update(updates))._build();
 
   _$LiveSessionsRecord._(
@@ -205,7 +206,7 @@ class _$LiveSessionsRecord extends LiveSessionsRecord {
       this.sessionImage,
       this.sessionLengthMinutes,
       this.sessionImageEntry,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -231,7 +232,7 @@ class _$LiveSessionsRecord extends LiveSessionsRecord {
         sessionImage == other.sessionImage &&
         sessionLengthMinutes == other.sessionLengthMinutes &&
         sessionImageEntry == other.sessionImageEntry &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -255,7 +256,7 @@ class _$LiveSessionsRecord extends LiveSessionsRecord {
                     sessionImage.hashCode),
                 sessionLengthMinutes.hashCode),
             sessionImageEntry.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -271,67 +272,66 @@ class _$LiveSessionsRecord extends LiveSessionsRecord {
           ..add('sessionImage', sessionImage)
           ..add('sessionLengthMinutes', sessionLengthMinutes)
           ..add('sessionImageEntry', sessionImageEntry)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class LiveSessionsRecordBuilder
     implements Builder<LiveSessionsRecord, LiveSessionsRecordBuilder> {
-  _$LiveSessionsRecord _$v;
+  _$LiveSessionsRecord? _$v;
 
-  String _sessionName;
-  String get sessionName => _$this._sessionName;
-  set sessionName(String sessionName) => _$this._sessionName = sessionName;
+  String? _sessionName;
+  String? get sessionName => _$this._sessionName;
+  set sessionName(String? sessionName) => _$this._sessionName = sessionName;
 
-  String _sessionDescription;
-  String get sessionDescription => _$this._sessionDescription;
-  set sessionDescription(String sessionDescription) =>
+  String? _sessionDescription;
+  String? get sessionDescription => _$this._sessionDescription;
+  set sessionDescription(String? sessionDescription) =>
       _$this._sessionDescription = sessionDescription;
 
-  String _sessionTherapist;
-  String get sessionTherapist => _$this._sessionTherapist;
-  set sessionTherapist(String sessionTherapist) =>
+  String? _sessionTherapist;
+  String? get sessionTherapist => _$this._sessionTherapist;
+  set sessionTherapist(String? sessionTherapist) =>
       _$this._sessionTherapist = sessionTherapist;
 
-  String _sessionHowPrepare;
-  String get sessionHowPrepare => _$this._sessionHowPrepare;
-  set sessionHowPrepare(String sessionHowPrepare) =>
+  String? _sessionHowPrepare;
+  String? get sessionHowPrepare => _$this._sessionHowPrepare;
+  set sessionHowPrepare(String? sessionHowPrepare) =>
       _$this._sessionHowPrepare = sessionHowPrepare;
 
-  String _sessionScienceBehind;
-  String get sessionScienceBehind => _$this._sessionScienceBehind;
-  set sessionScienceBehind(String sessionScienceBehind) =>
+  String? _sessionScienceBehind;
+  String? get sessionScienceBehind => _$this._sessionScienceBehind;
+  set sessionScienceBehind(String? sessionScienceBehind) =>
       _$this._sessionScienceBehind = sessionScienceBehind;
 
-  String _sessionAgenda;
-  String get sessionAgenda => _$this._sessionAgenda;
-  set sessionAgenda(String sessionAgenda) =>
+  String? _sessionAgenda;
+  String? get sessionAgenda => _$this._sessionAgenda;
+  set sessionAgenda(String? sessionAgenda) =>
       _$this._sessionAgenda = sessionAgenda;
 
-  String _sessionZoomLink;
-  String get sessionZoomLink => _$this._sessionZoomLink;
-  set sessionZoomLink(String sessionZoomLink) =>
+  String? _sessionZoomLink;
+  String? get sessionZoomLink => _$this._sessionZoomLink;
+  set sessionZoomLink(String? sessionZoomLink) =>
       _$this._sessionZoomLink = sessionZoomLink;
 
-  String _sessionImage;
-  String get sessionImage => _$this._sessionImage;
-  set sessionImage(String sessionImage) => _$this._sessionImage = sessionImage;
+  String? _sessionImage;
+  String? get sessionImage => _$this._sessionImage;
+  set sessionImage(String? sessionImage) => _$this._sessionImage = sessionImage;
 
-  int _sessionLengthMinutes;
-  int get sessionLengthMinutes => _$this._sessionLengthMinutes;
-  set sessionLengthMinutes(int sessionLengthMinutes) =>
+  int? _sessionLengthMinutes;
+  int? get sessionLengthMinutes => _$this._sessionLengthMinutes;
+  set sessionLengthMinutes(int? sessionLengthMinutes) =>
       _$this._sessionLengthMinutes = sessionLengthMinutes;
 
-  String _sessionImageEntry;
-  String get sessionImageEntry => _$this._sessionImageEntry;
-  set sessionImageEntry(String sessionImageEntry) =>
+  String? _sessionImageEntry;
+  String? get sessionImageEntry => _$this._sessionImageEntry;
+  set sessionImageEntry(String? sessionImageEntry) =>
       _$this._sessionImageEntry = sessionImageEntry;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   LiveSessionsRecordBuilder() {
     LiveSessionsRecord._initializeBuilder(this);
@@ -350,7 +350,7 @@ class LiveSessionsRecordBuilder
       _sessionImage = $v.sessionImage;
       _sessionLengthMinutes = $v.sessionLengthMinutes;
       _sessionImageEntry = $v.sessionImageEntry;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -363,7 +363,7 @@ class LiveSessionsRecordBuilder
   }
 
   @override
-  void update(void Function(LiveSessionsRecordBuilder) updates) {
+  void update(void Function(LiveSessionsRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -383,7 +383,7 @@ class LiveSessionsRecordBuilder
             sessionImage: sessionImage,
             sessionLengthMinutes: sessionLengthMinutes,
             sessionImageEntry: sessionImageEntry,
-            reference: reference);
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

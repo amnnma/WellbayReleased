@@ -15,59 +15,94 @@ class _$VideoRecordSerializer implements StructuredSerializer<VideoRecord> {
   final String wireName = 'VideoRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, VideoRecord object,
+  Iterable<Object?> serialize(Serializers serializers, VideoRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
-    value = object.videoname;
+    final result = <Object?>[];
+    Object? value;
+    value = object.name;
     if (value != null) {
       result
-        ..add('videoname')
+        ..add('name')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.videourl;
+    value = object.videoLink;
     if (value != null) {
       result
-        ..add('videourl')
+        ..add('videoLink')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.reference;
+    value = object.journalNoteText;
+    if (value != null) {
+      result
+        ..add('journalNoteText')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.index;
+    if (value != null) {
+      result
+        ..add('index')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.courseRef;
+    if (value != null) {
+      result
+        ..add('courseRef')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
+    }
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
-  VideoRecord deserialize(Serializers serializers, Iterable<Object> serialized,
+  VideoRecord deserialize(Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new VideoRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
-        case 'videoname':
-          result.videoname = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
           break;
-        case 'videourl':
-          result.videourl = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+        case 'videoLink':
+          result.videoLink = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'journalNoteText':
+          result.journalNoteText = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'index':
+          result.index = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'courseRef':
+          result.courseRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -78,16 +113,29 @@ class _$VideoRecordSerializer implements StructuredSerializer<VideoRecord> {
 
 class _$VideoRecord extends VideoRecord {
   @override
-  final String videoname;
+  final String? name;
   @override
-  final String videourl;
+  final String? videoLink;
   @override
-  final DocumentReference<Object> reference;
+  final String? journalNoteText;
+  @override
+  final int? index;
+  @override
+  final DocumentReference<Object?>? courseRef;
+  @override
+  final DocumentReference<Object?>? ffRef;
 
-  factory _$VideoRecord([void Function(VideoRecordBuilder) updates]) =>
+  factory _$VideoRecord([void Function(VideoRecordBuilder)? updates]) =>
       (new VideoRecordBuilder()..update(updates))._build();
 
-  _$VideoRecord._({this.videoname, this.videourl, this.reference}) : super._();
+  _$VideoRecord._(
+      {this.name,
+      this.videoLink,
+      this.journalNoteText,
+      this.index,
+      this.courseRef,
+      this.ffRef})
+      : super._();
 
   @override
   VideoRecord rebuild(void Function(VideoRecordBuilder) updates) =>
@@ -100,42 +148,67 @@ class _$VideoRecord extends VideoRecord {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is VideoRecord &&
-        videoname == other.videoname &&
-        videourl == other.videourl &&
-        reference == other.reference;
+        name == other.name &&
+        videoLink == other.videoLink &&
+        journalNoteText == other.journalNoteText &&
+        index == other.index &&
+        courseRef == other.courseRef &&
+        ffRef == other.ffRef;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, videoname.hashCode), videourl.hashCode),
-        reference.hashCode));
+    return $jf($jc(
+        $jc(
+            $jc(
+                $jc($jc($jc(0, name.hashCode), videoLink.hashCode),
+                    journalNoteText.hashCode),
+                index.hashCode),
+            courseRef.hashCode),
+        ffRef.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'VideoRecord')
-          ..add('videoname', videoname)
-          ..add('videourl', videourl)
-          ..add('reference', reference))
+          ..add('name', name)
+          ..add('videoLink', videoLink)
+          ..add('journalNoteText', journalNoteText)
+          ..add('index', index)
+          ..add('courseRef', courseRef)
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class VideoRecordBuilder implements Builder<VideoRecord, VideoRecordBuilder> {
-  _$VideoRecord _$v;
+  _$VideoRecord? _$v;
 
-  String _videoname;
-  String get videoname => _$this._videoname;
-  set videoname(String videoname) => _$this._videoname = videoname;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
-  String _videourl;
-  String get videourl => _$this._videourl;
-  set videourl(String videourl) => _$this._videourl = videourl;
+  String? _videoLink;
+  String? get videoLink => _$this._videoLink;
+  set videoLink(String? videoLink) => _$this._videoLink = videoLink;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  String? _journalNoteText;
+  String? get journalNoteText => _$this._journalNoteText;
+  set journalNoteText(String? journalNoteText) =>
+      _$this._journalNoteText = journalNoteText;
+
+  int? _index;
+  int? get index => _$this._index;
+  set index(int? index) => _$this._index = index;
+
+  DocumentReference<Object?>? _courseRef;
+  DocumentReference<Object?>? get courseRef => _$this._courseRef;
+  set courseRef(DocumentReference<Object?>? courseRef) =>
+      _$this._courseRef = courseRef;
+
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   VideoRecordBuilder() {
     VideoRecord._initializeBuilder(this);
@@ -144,9 +217,12 @@ class VideoRecordBuilder implements Builder<VideoRecord, VideoRecordBuilder> {
   VideoRecordBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _videoname = $v.videoname;
-      _videourl = $v.videourl;
-      _reference = $v.reference;
+      _name = $v.name;
+      _videoLink = $v.videoLink;
+      _journalNoteText = $v.journalNoteText;
+      _index = $v.index;
+      _courseRef = $v.courseRef;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -159,7 +235,7 @@ class VideoRecordBuilder implements Builder<VideoRecord, VideoRecordBuilder> {
   }
 
   @override
-  void update(void Function(VideoRecordBuilder) updates) {
+  void update(void Function(VideoRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -169,7 +245,12 @@ class VideoRecordBuilder implements Builder<VideoRecord, VideoRecordBuilder> {
   _$VideoRecord _build() {
     final _$result = _$v ??
         new _$VideoRecord._(
-            videoname: videoname, videourl: videourl, reference: reference);
+            name: name,
+            videoLink: videoLink,
+            journalNoteText: journalNoteText,
+            index: index,
+            courseRef: courseRef,
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

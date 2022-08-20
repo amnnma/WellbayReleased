@@ -10,11 +10,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppointmentDetailsWidget extends StatefulWidget {
   const AppointmentDetailsWidget({
-    Key key,
+    Key? key,
     this.appointmentDetails,
   }) : super(key: key);
 
-  final DocumentReference appointmentDetails;
+  final DocumentReference? appointmentDetails;
 
   @override
   _AppointmentDetailsWidgetState createState() =>
@@ -27,7 +27,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<AppointmentsRecord>(
-      stream: AppointmentsRecord.getDocument(widget.appointmentDetails),
+      stream: AppointmentsRecord.getDocument(widget.appointmentDetails!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -42,7 +42,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
             ),
           );
         }
-        final appointmentDetailsAppointmentsRecord = snapshot.data;
+        final appointmentDetailsAppointmentsRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -92,7 +92,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                     children: [
                       Expanded(
                         child: Text(
-                          appointmentDetailsAppointmentsRecord.appointmentType,
+                          appointmentDetailsAppointmentsRecord.appointmentType!,
                           style: FlutterFlowTheme.of(context).title3.override(
                                 fontFamily: 'Lexend Deca',
                                 fontWeight: FontWeight.bold,
@@ -124,7 +124,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                       Expanded(
                         child: Text(
                           appointmentDetailsAppointmentsRecord
-                              .appointmentDescription,
+                              .appointmentDescription!,
                           style: FlutterFlowTheme.of(context).bodyText2,
                         ),
                       ),
@@ -167,7 +167,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                               ),
                             );
                           }
-                          final containerAppointmentsRecord = snapshot.data;
+                          final containerAppointmentsRecord = snapshot.data!;
                           return Material(
                             color: Colors.transparent,
                             elevation: 3,
@@ -227,7 +227,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                                             children: [
                                               Text(
                                                 appointmentDetailsAppointmentsRecord
-                                                    .appointmentName,
+                                                    .appointmentName!,
                                                 style: FlutterFlowTheme.of(
                                                         context)
                                                     .subtitle1
@@ -243,7 +243,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                                           ),
                                           Text(
                                             appointmentDetailsAppointmentsRecord
-                                                .appointmentEmail,
+                                                .appointmentEmail!,
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
@@ -293,7 +293,7 @@ class _AppointmentDetailsWidgetState extends State<AppointmentDetailsWidget> {
                           dateTimeFormat(
                               'MMMMEEEEd',
                               appointmentDetailsAppointmentsRecord
-                                  .appointmentTime),
+                                  .appointmentTime!),
                           style: FlutterFlowTheme.of(context).title1,
                         ),
                       ),

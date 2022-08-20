@@ -14,11 +14,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BookAppointmentWidget extends StatefulWidget {
   const BookAppointmentWidget({
-    Key key,
+    Key? key,
     this.userProfile,
   }) : super(key: key);
 
-  final DocumentReference userProfile;
+  final DocumentReference? userProfile;
 
   @override
   _BookAppointmentWidgetState createState() => _BookAppointmentWidgetState();
@@ -26,10 +26,10 @@ class BookAppointmentWidget extends StatefulWidget {
 
 class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
     with TickerProviderStateMixin {
-  DateTime datePicked;
-  String dropDownValue;
-  TextEditingController personsNameController;
-  TextEditingController problemDescriptionController;
+  DateTime? datePicked;
+  String? dropDownValue;
+  TextEditingController? personsNameController;
+  TextEditingController? problemDescriptionController;
   final animationsMap = {
     'textFieldOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -146,7 +146,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
       child: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
         child: StreamBuilder<UsersRecord>(
-          stream: UsersRecord.getDocument(currentUserReference),
+          stream: UsersRecord.getDocument(currentUserReference!),
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.
             if (!snapshot.hasData) {
@@ -161,7 +161,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                 ),
               );
             }
-            final columnUsersRecord = snapshot.data;
+            final columnUsersRecord = snapshot.data!;
             return SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -248,7 +248,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                             fontWeight: FontWeight.bold,
                           ),
                     ).animated(
-                        [animationsMap['textFieldOnPageLoadAnimation1']]),
+                        [animationsMap['textFieldOnPageLoadAnimation1']!]),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
@@ -279,7 +279,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                       borderRadius: 8,
                       margin: EdgeInsetsDirectional.fromSTEB(20, 4, 16, 4),
                       hidesUnderline: true,
-                    ).animated([animationsMap['dropDownOnPageLoadAnimation']]),
+                    ).animated([animationsMap['dropDownOnPageLoadAnimation']!]),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
@@ -316,7 +316,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                       maxLines: 8,
                       keyboardType: TextInputType.multiline,
                     ).animated(
-                        [animationsMap['textFieldOnPageLoadAnimation2']]),
+                        [animationsMap['textFieldOnPageLoadAnimation2']!]),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
@@ -424,7 +424,8 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                           ),
                         ),
                       ),
-                    ).animated([animationsMap['containerOnPageLoadAnimation']]),
+                    ).animated(
+                        [animationsMap['containerOnPageLoadAnimation']!]),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 20),
@@ -456,7 +457,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ).animated(
-                            [animationsMap['buttonOnPageLoadAnimation1']]),
+                            [animationsMap['buttonOnPageLoadAnimation1']!]),
                         FFButtonWidget(
                           onPressed: () async {
                             final appointmentsCreateData =
@@ -466,7 +467,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                               appointmentName:
                                   personsNameController?.text ?? '',
                               appointmentDescription:
-                                  problemDescriptionController.text,
+                                  problemDescriptionController!.text,
                               appointmentEmail: currentUserEmail,
                             );
                             await AppointmentsRecord.collection
@@ -493,7 +494,7 @@ class _BookAppointmentWidgetState extends State<BookAppointmentWidget>
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ).animated(
-                            [animationsMap['buttonOnPageLoadAnimation2']]),
+                            [animationsMap['buttonOnPageLoadAnimation2']!]),
                       ],
                     ),
                   ),

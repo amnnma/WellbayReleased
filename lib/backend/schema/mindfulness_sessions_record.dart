@@ -12,21 +12,17 @@ abstract class MindfulnessSessionsRecord
   static Serializer<MindfulnessSessionsRecord> get serializer =>
       _$mindfulnessSessionsRecordSerializer;
 
-  @nullable
-  String get sessionName;
+  String? get sessionName;
 
-  @nullable
-  int get sessionLengthMinutes;
+  int? get sessionLengthMinutes;
 
-  @nullable
-  String get sessionImage;
+  String? get sessionImage;
 
-  @nullable
-  String get sessionVideo;
+  String? get sessionVideo;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(MindfulnessSessionsRecordBuilder builder) =>
       builder
@@ -40,12 +36,12 @@ abstract class MindfulnessSessionsRecord
 
   static Stream<MindfulnessSessionsRecord> getDocument(DocumentReference ref) =>
       ref.snapshots().map(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<MindfulnessSessionsRecord> getDocumentOnce(
           DocumentReference ref) =>
       ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   MindfulnessSessionsRecord._();
   factory MindfulnessSessionsRecord(
@@ -55,19 +51,25 @@ abstract class MindfulnessSessionsRecord
   static MindfulnessSessionsRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createMindfulnessSessionsRecordData({
-  String sessionName,
-  int sessionLengthMinutes,
-  String sessionImage,
-  String sessionVideo,
-}) =>
-    serializers.toFirestore(
-        MindfulnessSessionsRecord.serializer,
-        MindfulnessSessionsRecord((m) => m
-          ..sessionName = sessionName
-          ..sessionLengthMinutes = sessionLengthMinutes
-          ..sessionImage = sessionImage
-          ..sessionVideo = sessionVideo));
+  String? sessionName,
+  int? sessionLengthMinutes,
+  String? sessionImage,
+  String? sessionVideo,
+}) {
+  final firestoreData = serializers.toFirestore(
+    MindfulnessSessionsRecord.serializer,
+    MindfulnessSessionsRecord(
+      (m) => m
+        ..sessionName = sessionName
+        ..sessionLengthMinutes = sessionLengthMinutes
+        ..sessionImage = sessionImage
+        ..sessionVideo = sessionVideo,
+    ),
+  );
+
+  return firestoreData;
+}

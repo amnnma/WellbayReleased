@@ -17,17 +17,18 @@ class _$UsersCoursesRecordSerializer
   final String wireName = 'UsersCoursesRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, UsersCoursesRecord object,
+  Iterable<Object?> serialize(
+      Serializers serializers, UsersCoursesRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.userRef;
     if (value != null) {
       result
         ..add('userRef')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.refCourse;
     if (value != null) {
@@ -35,20 +36,13 @@ class _$UsersCoursesRecordSerializer
         ..add('refCourse')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.progress;
     if (value != null) {
       result
         ..add('progress')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
-    }
-    value = object.dUPnumberOfLessons;
-    if (value != null) {
-      result
-        ..add('DUPnumberOfLessons')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
     }
     value = object.courseFinished;
     if (value != null) {
@@ -57,58 +51,64 @@ class _$UsersCoursesRecordSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
-    value = object.reference;
+    value = object.dUPnumberOfLessons;
+    if (value != null) {
+      result
+        ..add('DUPnumberOfLessons')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   UsersCoursesRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new UsersCoursesRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'userRef':
           result.userRef = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'refCourse':
           result.refCourse = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'progress':
           result.progress = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
-          break;
-        case 'DUPnumberOfLessons':
-          result.dUPnumberOfLessons = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'courseFinished':
           result.courseFinished = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool)) as bool?;
+          break;
+        case 'DUPnumberOfLessons':
+          result.dUPnumberOfLessons = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -119,29 +119,29 @@ class _$UsersCoursesRecordSerializer
 
 class _$UsersCoursesRecord extends UsersCoursesRecord {
   @override
-  final DocumentReference<Object> userRef;
+  final DocumentReference<Object?>? userRef;
   @override
-  final DocumentReference<Object> refCourse;
+  final DocumentReference<Object?>? refCourse;
   @override
-  final int progress;
+  final int? progress;
   @override
-  final bool dUPnumberOfLessons;
+  final bool? courseFinished;
   @override
-  final bool courseFinished;
+  final int? dUPnumberOfLessons;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
   factory _$UsersCoursesRecord(
-          [void Function(UsersCoursesRecordBuilder) updates]) =>
+          [void Function(UsersCoursesRecordBuilder)? updates]) =>
       (new UsersCoursesRecordBuilder()..update(updates))._build();
 
   _$UsersCoursesRecord._(
       {this.userRef,
       this.refCourse,
       this.progress,
-      this.dUPnumberOfLessons,
       this.courseFinished,
-      this.reference})
+      this.dUPnumberOfLessons,
+      this.ffRef})
       : super._();
 
   @override
@@ -160,9 +160,9 @@ class _$UsersCoursesRecord extends UsersCoursesRecord {
         userRef == other.userRef &&
         refCourse == other.refCourse &&
         progress == other.progress &&
-        dUPnumberOfLessons == other.dUPnumberOfLessons &&
         courseFinished == other.courseFinished &&
-        reference == other.reference;
+        dUPnumberOfLessons == other.dUPnumberOfLessons &&
+        ffRef == other.ffRef;
   }
 
   @override
@@ -172,9 +172,9 @@ class _$UsersCoursesRecord extends UsersCoursesRecord {
             $jc(
                 $jc($jc($jc(0, userRef.hashCode), refCourse.hashCode),
                     progress.hashCode),
-                dUPnumberOfLessons.hashCode),
-            courseFinished.hashCode),
-        reference.hashCode));
+                courseFinished.hashCode),
+            dUPnumberOfLessons.hashCode),
+        ffRef.hashCode));
   }
 
   @override
@@ -183,44 +183,43 @@ class _$UsersCoursesRecord extends UsersCoursesRecord {
           ..add('userRef', userRef)
           ..add('refCourse', refCourse)
           ..add('progress', progress)
-          ..add('dUPnumberOfLessons', dUPnumberOfLessons)
           ..add('courseFinished', courseFinished)
-          ..add('reference', reference))
+          ..add('dUPnumberOfLessons', dUPnumberOfLessons)
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class UsersCoursesRecordBuilder
     implements Builder<UsersCoursesRecord, UsersCoursesRecordBuilder> {
-  _$UsersCoursesRecord _$v;
+  _$UsersCoursesRecord? _$v;
 
-  DocumentReference<Object> _userRef;
-  DocumentReference<Object> get userRef => _$this._userRef;
-  set userRef(DocumentReference<Object> userRef) => _$this._userRef = userRef;
+  DocumentReference<Object?>? _userRef;
+  DocumentReference<Object?>? get userRef => _$this._userRef;
+  set userRef(DocumentReference<Object?>? userRef) => _$this._userRef = userRef;
 
-  DocumentReference<Object> _refCourse;
-  DocumentReference<Object> get refCourse => _$this._refCourse;
-  set refCourse(DocumentReference<Object> refCourse) =>
+  DocumentReference<Object?>? _refCourse;
+  DocumentReference<Object?>? get refCourse => _$this._refCourse;
+  set refCourse(DocumentReference<Object?>? refCourse) =>
       _$this._refCourse = refCourse;
 
-  int _progress;
-  int get progress => _$this._progress;
-  set progress(int progress) => _$this._progress = progress;
+  int? _progress;
+  int? get progress => _$this._progress;
+  set progress(int? progress) => _$this._progress = progress;
 
-  bool _dUPnumberOfLessons;
-  bool get dUPnumberOfLessons => _$this._dUPnumberOfLessons;
-  set dUPnumberOfLessons(bool dUPnumberOfLessons) =>
-      _$this._dUPnumberOfLessons = dUPnumberOfLessons;
-
-  bool _courseFinished;
-  bool get courseFinished => _$this._courseFinished;
-  set courseFinished(bool courseFinished) =>
+  bool? _courseFinished;
+  bool? get courseFinished => _$this._courseFinished;
+  set courseFinished(bool? courseFinished) =>
       _$this._courseFinished = courseFinished;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  int? _dUPnumberOfLessons;
+  int? get dUPnumberOfLessons => _$this._dUPnumberOfLessons;
+  set dUPnumberOfLessons(int? dUPnumberOfLessons) =>
+      _$this._dUPnumberOfLessons = dUPnumberOfLessons;
+
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   UsersCoursesRecordBuilder() {
     UsersCoursesRecord._initializeBuilder(this);
@@ -232,9 +231,9 @@ class UsersCoursesRecordBuilder
       _userRef = $v.userRef;
       _refCourse = $v.refCourse;
       _progress = $v.progress;
-      _dUPnumberOfLessons = $v.dUPnumberOfLessons;
       _courseFinished = $v.courseFinished;
-      _reference = $v.reference;
+      _dUPnumberOfLessons = $v.dUPnumberOfLessons;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -247,7 +246,7 @@ class UsersCoursesRecordBuilder
   }
 
   @override
-  void update(void Function(UsersCoursesRecordBuilder) updates) {
+  void update(void Function(UsersCoursesRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -260,9 +259,9 @@ class UsersCoursesRecordBuilder
             userRef: userRef,
             refCourse: refCourse,
             progress: progress,
-            dUPnumberOfLessons: dUPnumberOfLessons,
             courseFinished: courseFinished,
-            reference: reference);
+            dUPnumberOfLessons: dUPnumberOfLessons,
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

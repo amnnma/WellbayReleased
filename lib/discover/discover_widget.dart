@@ -1,4 +1,4 @@
-import '../audio_player/audio_player_widget.dart';
+import '../audio_details/audio_details_widget.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -7,7 +7,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DiscoverWidget extends StatefulWidget {
-  const DiscoverWidget({Key key}) : super(key: key);
+  const DiscoverWidget({Key? key}) : super(key: key);
 
   @override
   _DiscoverWidgetState createState() => _DiscoverWidgetState();
@@ -60,7 +60,7 @@ class _DiscoverWidgetState extends State<DiscoverWidget> {
                     ),
                   );
                 }
-                List<PodcastRecord> wrapPodcastRecordList = snapshot.data;
+                List<PodcastRecord> wrapPodcastRecordList = snapshot.data!;
                 return Wrap(
                   spacing: 8,
                   runSpacing: 8,
@@ -78,7 +78,7 @@ class _DiscoverWidgetState extends State<DiscoverWidget> {
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => AudioPlayerWidget(
+                            builder: (context) => AudioDetailsWidget(
                               podcastitem: wrapPodcastRecord,
                             ),
                           ),
@@ -114,7 +114,7 @@ class _DiscoverWidgetState extends State<DiscoverWidget> {
                                         topRight: Radius.circular(8),
                                       ),
                                       child: Image.network(
-                                        wrapPodcastRecord.podcastImage,
+                                        wrapPodcastRecord.podcastImage!,
                                         width: 100,
                                         height: 110,
                                         fit: BoxFit.cover,
@@ -133,7 +133,7 @@ class _DiscoverWidgetState extends State<DiscoverWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           8, 4, 0, 0),
                                       child: Text(
-                                        wrapPodcastRecord.podcasttitle,
+                                        wrapPodcastRecord.podcasttitle!,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1
                                             .override(
@@ -157,7 +157,7 @@ class _DiscoverWidgetState extends State<DiscoverWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           8, 4, 0, 0),
                                       child: Text(
-                                        wrapPodcastRecord.podcastCreatename,
+                                        wrapPodcastRecord.podcastCreatename!,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(

@@ -11,25 +11,20 @@ abstract class UsersCoursesRecord
   static Serializer<UsersCoursesRecord> get serializer =>
       _$usersCoursesRecordSerializer;
 
-  @nullable
-  DocumentReference get userRef;
+  DocumentReference? get userRef;
 
-  @nullable
-  DocumentReference get refCourse;
+  DocumentReference? get refCourse;
 
-  @nullable
-  int get progress;
+  int? get progress;
 
-  @nullable
-  bool get courseFinished;
+  bool? get courseFinished;
 
-  @nullable
   @BuiltValueField(wireName: 'DUPnumberOfLessons')
-  int get dUPnumberOfLessons;
+  int? get dUPnumberOfLessons;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(UsersCoursesRecordBuilder builder) => builder
     ..progress = 0
@@ -41,11 +36,11 @@ abstract class UsersCoursesRecord
 
   static Stream<UsersCoursesRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<UsersCoursesRecord> getDocumentOnce(DocumentReference ref) =>
       ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   UsersCoursesRecord._();
   factory UsersCoursesRecord(
@@ -55,21 +50,27 @@ abstract class UsersCoursesRecord
   static UsersCoursesRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createUsersCoursesRecordData({
-  DocumentReference userRef,
-  DocumentReference refCourse,
-  int progress,
-  bool courseFinished,
-  int dUPnumberOfLessons,
-}) =>
-    serializers.toFirestore(
-        UsersCoursesRecord.serializer,
-        UsersCoursesRecord((u) => u
-          ..userRef = userRef
-          ..refCourse = refCourse
-          ..progress = progress
-          ..courseFinished = courseFinished
-          ..dUPnumberOfLessons = dUPnumberOfLessons));
+  DocumentReference? userRef,
+  DocumentReference? refCourse,
+  int? progress,
+  bool? courseFinished,
+  int? dUPnumberOfLessons,
+}) {
+  final firestoreData = serializers.toFirestore(
+    UsersCoursesRecord.serializer,
+    UsersCoursesRecord(
+      (u) => u
+        ..userRef = userRef
+        ..refCourse = refCourse
+        ..progress = progress
+        ..courseFinished = courseFinished
+        ..dUPnumberOfLessons = dUPnumberOfLessons,
+    ),
+  );
+
+  return firestoreData;
+}

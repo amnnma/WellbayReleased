@@ -16,10 +16,10 @@ class _$CoursesRecordSerializer implements StructuredSerializer<CoursesRecord> {
   final String wireName = 'CoursesRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, CoursesRecord object,
+  Iterable<Object?> serialize(Serializers serializers, CoursesRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.courseName;
     if (value != null) {
       result
@@ -33,7 +33,8 @@ class _$CoursesRecordSerializer implements StructuredSerializer<CoursesRecord> {
         ..add('videoRef')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(BuiltList, const [
-              const FullType(DocumentReference, const [const FullType(Object)])
+              const FullType(
+                  DocumentReference, const [const FullType.nullable(Object)])
             ])));
     }
     value = object.courseImage;
@@ -55,7 +56,8 @@ class _$CoursesRecordSerializer implements StructuredSerializer<CoursesRecord> {
         ..add('authorsRef')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(BuiltList, const [
-              const FullType(DocumentReference, const [const FullType(Object)])
+              const FullType(
+                  DocumentReference, const [const FullType.nullable(Object)])
             ])));
     }
     value = object.whatLearn;
@@ -91,80 +93,80 @@ class _$CoursesRecordSerializer implements StructuredSerializer<CoursesRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   CoursesRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CoursesRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'courseName':
           result.courseName = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'videoRef':
           result.videoRef.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
                 const FullType(
-                    DocumentReference, const [const FullType(Object)])
-              ])) as BuiltList<Object>);
+                    DocumentReference, const [const FullType.nullable(Object)])
+              ]))! as BuiltList<Object?>);
           break;
         case 'courseImage':
           result.courseImage = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'courseType':
           result.courseType = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'authorsRef':
           result.authorsRef.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltList, const [
                 const FullType(
-                    DocumentReference, const [const FullType(Object)])
-              ])) as BuiltList<Object>);
+                    DocumentReference, const [const FullType.nullable(Object)])
+              ]))! as BuiltList<Object?>);
           break;
         case 'WhatLearn':
           result.whatLearn = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool)) as bool?;
           break;
         case 'HowWork':
           result.howWork = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool)) as bool?;
           break;
         case 'courseLength':
           result.courseLength = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'numberOfLessons':
           result.numberOfLessons = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'courseEntryImage':
           result.courseEntryImage = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -175,29 +177,29 @@ class _$CoursesRecordSerializer implements StructuredSerializer<CoursesRecord> {
 
 class _$CoursesRecord extends CoursesRecord {
   @override
-  final String courseName;
+  final String? courseName;
   @override
-  final BuiltList<DocumentReference<Object>> videoRef;
+  final BuiltList<DocumentReference<Object?>>? videoRef;
   @override
-  final String courseImage;
+  final String? courseImage;
   @override
-  final int courseType;
+  final int? courseType;
   @override
-  final BuiltList<DocumentReference<Object>> authorsRef;
+  final BuiltList<DocumentReference<Object?>>? authorsRef;
   @override
-  final bool whatLearn;
+  final bool? whatLearn;
   @override
-  final bool howWork;
+  final bool? howWork;
   @override
-  final int courseLength;
+  final int? courseLength;
   @override
-  final int numberOfLessons;
+  final int? numberOfLessons;
   @override
-  final String courseEntryImage;
+  final String? courseEntryImage;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
-  factory _$CoursesRecord([void Function(CoursesRecordBuilder) updates]) =>
+  factory _$CoursesRecord([void Function(CoursesRecordBuilder)? updates]) =>
       (new CoursesRecordBuilder()..update(updates))._build();
 
   _$CoursesRecord._(
@@ -211,7 +213,7 @@ class _$CoursesRecord extends CoursesRecord {
       this.courseLength,
       this.numberOfLessons,
       this.courseEntryImage,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -235,7 +237,7 @@ class _$CoursesRecord extends CoursesRecord {
         courseLength == other.courseLength &&
         numberOfLessons == other.numberOfLessons &&
         courseEntryImage == other.courseEntryImage &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -259,7 +261,7 @@ class _$CoursesRecord extends CoursesRecord {
                     courseLength.hashCode),
                 numberOfLessons.hashCode),
             courseEntryImage.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -275,65 +277,64 @@ class _$CoursesRecord extends CoursesRecord {
           ..add('courseLength', courseLength)
           ..add('numberOfLessons', numberOfLessons)
           ..add('courseEntryImage', courseEntryImage)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class CoursesRecordBuilder
     implements Builder<CoursesRecord, CoursesRecordBuilder> {
-  _$CoursesRecord _$v;
+  _$CoursesRecord? _$v;
 
-  String _courseName;
-  String get courseName => _$this._courseName;
-  set courseName(String courseName) => _$this._courseName = courseName;
+  String? _courseName;
+  String? get courseName => _$this._courseName;
+  set courseName(String? courseName) => _$this._courseName = courseName;
 
-  ListBuilder<DocumentReference<Object>> _videoRef;
-  ListBuilder<DocumentReference<Object>> get videoRef =>
-      _$this._videoRef ??= new ListBuilder<DocumentReference<Object>>();
-  set videoRef(ListBuilder<DocumentReference<Object>> videoRef) =>
+  ListBuilder<DocumentReference<Object?>>? _videoRef;
+  ListBuilder<DocumentReference<Object?>> get videoRef =>
+      _$this._videoRef ??= new ListBuilder<DocumentReference<Object?>>();
+  set videoRef(ListBuilder<DocumentReference<Object?>>? videoRef) =>
       _$this._videoRef = videoRef;
 
-  String _courseImage;
-  String get courseImage => _$this._courseImage;
-  set courseImage(String courseImage) => _$this._courseImage = courseImage;
+  String? _courseImage;
+  String? get courseImage => _$this._courseImage;
+  set courseImage(String? courseImage) => _$this._courseImage = courseImage;
 
-  int _courseType;
-  int get courseType => _$this._courseType;
-  set courseType(int courseType) => _$this._courseType = courseType;
+  int? _courseType;
+  int? get courseType => _$this._courseType;
+  set courseType(int? courseType) => _$this._courseType = courseType;
 
-  ListBuilder<DocumentReference<Object>> _authorsRef;
-  ListBuilder<DocumentReference<Object>> get authorsRef =>
-      _$this._authorsRef ??= new ListBuilder<DocumentReference<Object>>();
-  set authorsRef(ListBuilder<DocumentReference<Object>> authorsRef) =>
+  ListBuilder<DocumentReference<Object?>>? _authorsRef;
+  ListBuilder<DocumentReference<Object?>> get authorsRef =>
+      _$this._authorsRef ??= new ListBuilder<DocumentReference<Object?>>();
+  set authorsRef(ListBuilder<DocumentReference<Object?>>? authorsRef) =>
       _$this._authorsRef = authorsRef;
 
-  bool _whatLearn;
-  bool get whatLearn => _$this._whatLearn;
-  set whatLearn(bool whatLearn) => _$this._whatLearn = whatLearn;
+  bool? _whatLearn;
+  bool? get whatLearn => _$this._whatLearn;
+  set whatLearn(bool? whatLearn) => _$this._whatLearn = whatLearn;
 
-  bool _howWork;
-  bool get howWork => _$this._howWork;
-  set howWork(bool howWork) => _$this._howWork = howWork;
+  bool? _howWork;
+  bool? get howWork => _$this._howWork;
+  set howWork(bool? howWork) => _$this._howWork = howWork;
 
-  int _courseLength;
-  int get courseLength => _$this._courseLength;
-  set courseLength(int courseLength) => _$this._courseLength = courseLength;
+  int? _courseLength;
+  int? get courseLength => _$this._courseLength;
+  set courseLength(int? courseLength) => _$this._courseLength = courseLength;
 
-  int _numberOfLessons;
-  int get numberOfLessons => _$this._numberOfLessons;
-  set numberOfLessons(int numberOfLessons) =>
+  int? _numberOfLessons;
+  int? get numberOfLessons => _$this._numberOfLessons;
+  set numberOfLessons(int? numberOfLessons) =>
       _$this._numberOfLessons = numberOfLessons;
 
-  String _courseEntryImage;
-  String get courseEntryImage => _$this._courseEntryImage;
-  set courseEntryImage(String courseEntryImage) =>
+  String? _courseEntryImage;
+  String? get courseEntryImage => _$this._courseEntryImage;
+  set courseEntryImage(String? courseEntryImage) =>
       _$this._courseEntryImage = courseEntryImage;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   CoursesRecordBuilder() {
     CoursesRecord._initializeBuilder(this);
@@ -352,7 +353,7 @@ class CoursesRecordBuilder
       _courseLength = $v.courseLength;
       _numberOfLessons = $v.numberOfLessons;
       _courseEntryImage = $v.courseEntryImage;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -365,7 +366,7 @@ class CoursesRecordBuilder
   }
 
   @override
-  void update(void Function(CoursesRecordBuilder) updates) {
+  void update(void Function(CoursesRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -387,9 +388,9 @@ class CoursesRecordBuilder
               courseLength: courseLength,
               numberOfLessons: numberOfLessons,
               courseEntryImage: courseEntryImage,
-              reference: reference);
+              ffRef: ffRef);
     } catch (_) {
-      String _$failedField;
+      late String _$failedField;
       try {
         _$failedField = 'videoRef';
         _videoRef?.build();

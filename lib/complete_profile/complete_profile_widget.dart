@@ -7,14 +7,14 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
-import '../main.dart';
+import '../home_page/home_page_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CompleteProfileWidget extends StatefulWidget {
-  const CompleteProfileWidget({Key key}) : super(key: key);
+  const CompleteProfileWidget({Key? key}) : super(key: key);
 
   @override
   _CompleteProfileWidgetState createState() => _CompleteProfileWidgetState();
@@ -23,9 +23,9 @@ class CompleteProfileWidget extends StatefulWidget {
 class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
     with TickerProviderStateMixin {
   String uploadedFileUrl = '';
-  TextEditingController yourNameController;
-  TextEditingController yourAgeController;
-  String radioButtonValue;
+  TextEditingController? yourNameController;
+  TextEditingController? yourAgeController;
+  String? radioButtonValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final animationsMap = {
     'circleImageOnPageLoadAnimation': AnimationInfo(
@@ -203,10 +203,10 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                             (m) async =>
                                 await uploadData(m.storagePath, m.bytes))))
                         .where((u) => u != null)
+                        .map((u) => u!)
                         .toList();
                     ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    if (downloadUrls != null &&
-                        downloadUrls.length == selectedMedia.length) {
+                    if (downloadUrls.length == selectedMedia.length) {
                       setState(() => uploadedFileUrl = downloadUrls.first);
                       showUploadMessage(
                         context,
@@ -232,11 +232,11 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                     'assets/images/uiAvatar@2x.png',
                   ),
                 ),
-              ).animated([animationsMap['circleImageOnPageLoadAnimation']]),
+              ).animated([animationsMap['circleImageOnPageLoadAnimation']!]),
               Text(
                 'Upload a photo for us to easily identify you.',
                 style: FlutterFlowTheme.of(context).bodyText1,
-              ).animated([animationsMap['textOnPageLoadAnimation1']]),
+              ).animated([animationsMap['textOnPageLoadAnimation1']!]),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                 child: TextFormField(
@@ -276,7 +276,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                         fontFamily: 'Lexend Deca',
                         color: FlutterFlowTheme.of(context).textColor,
                       ),
-                ).animated([animationsMap['textFieldOnPageLoadAnimation1']]),
+                ).animated([animationsMap['textFieldOnPageLoadAnimation1']!]),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
@@ -318,7 +318,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                         color: FlutterFlowTheme.of(context).textColor,
                       ),
                   keyboardType: TextInputType.number,
-                ).animated([animationsMap['textFieldOnPageLoadAnimation2']]),
+                ).animated([animationsMap['textFieldOnPageLoadAnimation2']!]),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 0),
@@ -328,7 +328,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                     Text(
                       'Your Birth Sex',
                       style: FlutterFlowTheme.of(context).bodyText1,
-                    ).animated([animationsMap['textOnPageLoadAnimation2']]),
+                    ).animated([animationsMap['textOnPageLoadAnimation2']!]),
                   ],
                 ),
               ),
@@ -358,14 +358,14 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                       horizontalAlignment: WrapAlignment.start,
                       verticalAlignment: WrapCrossAlignment.start,
                     ).animated(
-                        [animationsMap['radioButtonOnPageLoadAnimation']]),
+                        [animationsMap['radioButtonOnPageLoadAnimation']!]),
                   ],
                 ),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
                 child: StreamBuilder<UsersRecord>(
-                  stream: UsersRecord.getDocument(currentUserReference),
+                  stream: UsersRecord.getDocument(currentUserReference!),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
@@ -380,12 +380,12 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                         ),
                       );
                     }
-                    final buttonLoginUsersRecord = snapshot.data;
+                    final buttonLoginUsersRecord = snapshot.data!;
                     return FFButtonWidget(
                       onPressed: () async {
                         final usersUpdateData = createUsersRecordData(
-                          displayName: yourNameController.text,
-                          age: int.parse(yourAgeController.text),
+                          displayName: yourNameController!.text,
+                          age: int.parse(yourAgeController!.text),
                           userSex: radioButtonValue,
                         );
                         await buttonLoginUsersRecord.reference
@@ -393,8 +393,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                NavBarPage(initialPage: 'homePage'),
+                            builder: (context) => HomePageWidget(),
                           ),
                         );
                       },
@@ -415,7 +414,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                         ),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                    ).animated([animationsMap['buttonOnPageLoadAnimation']]);
+                    ).animated([animationsMap['buttonOnPageLoadAnimation']!]);
                   },
                 ),
               ),

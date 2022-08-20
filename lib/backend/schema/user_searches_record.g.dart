@@ -17,10 +17,11 @@ class _$UserSearchesRecordSerializer
   final String wireName = 'UserSearchesRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, UserSearchesRecord object,
+  Iterable<Object?> serialize(
+      Serializers serializers, UserSearchesRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.searchText;
     if (value != null) {
       result
@@ -28,38 +29,38 @@ class _$UserSearchesRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   UserSearchesRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new UserSearchesRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'searchText':
           result.searchText = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -70,15 +71,15 @@ class _$UserSearchesRecordSerializer
 
 class _$UserSearchesRecord extends UserSearchesRecord {
   @override
-  final String searchText;
+  final String? searchText;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
   factory _$UserSearchesRecord(
-          [void Function(UserSearchesRecordBuilder) updates]) =>
+          [void Function(UserSearchesRecordBuilder)? updates]) =>
       (new UserSearchesRecordBuilder()..update(updates))._build();
 
-  _$UserSearchesRecord._({this.searchText, this.reference}) : super._();
+  _$UserSearchesRecord._({this.searchText, this.ffRef}) : super._();
 
   @override
   UserSearchesRecord rebuild(
@@ -94,35 +95,34 @@ class _$UserSearchesRecord extends UserSearchesRecord {
     if (identical(other, this)) return true;
     return other is UserSearchesRecord &&
         searchText == other.searchText &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, searchText.hashCode), reference.hashCode));
+    return $jf($jc($jc(0, searchText.hashCode), ffRef.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper(r'UserSearchesRecord')
           ..add('searchText', searchText)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class UserSearchesRecordBuilder
     implements Builder<UserSearchesRecord, UserSearchesRecordBuilder> {
-  _$UserSearchesRecord _$v;
+  _$UserSearchesRecord? _$v;
 
-  String _searchText;
-  String get searchText => _$this._searchText;
-  set searchText(String searchText) => _$this._searchText = searchText;
+  String? _searchText;
+  String? get searchText => _$this._searchText;
+  set searchText(String? searchText) => _$this._searchText = searchText;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   UserSearchesRecordBuilder() {
     UserSearchesRecord._initializeBuilder(this);
@@ -132,7 +132,7 @@ class UserSearchesRecordBuilder
     final $v = _$v;
     if ($v != null) {
       _searchText = $v.searchText;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -145,7 +145,7 @@ class UserSearchesRecordBuilder
   }
 
   @override
-  void update(void Function(UserSearchesRecordBuilder) updates) {
+  void update(void Function(UserSearchesRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -153,9 +153,8 @@ class UserSearchesRecordBuilder
   UserSearchesRecord build() => _build();
 
   _$UserSearchesRecord _build() {
-    final _$result = _$v ??
-        new _$UserSearchesRecord._(
-            searchText: searchText, reference: reference);
+    final _$result =
+        _$v ?? new _$UserSearchesRecord._(searchText: searchText, ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

@@ -8,7 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AudioWidget extends StatefulWidget {
-  const AudioWidget({Key key}) : super(key: key);
+  const AudioWidget({Key? key}) : super(key: key);
 
   @override
   _AudioWidgetState createState() => _AudioWidgetState();
@@ -48,7 +48,8 @@ class _AudioWidgetState extends State<AudioWidget> {
                       ),
                     );
                   }
-                  List<PodcastRecord> listViewPodcastRecordList = snapshot.data;
+                  List<PodcastRecord> listViewPodcastRecordList =
+                      snapshot.data!;
                   return ListView.builder(
                     padding: EdgeInsets.zero,
                     shrinkWrap: true,
@@ -59,9 +60,9 @@ class _AudioWidgetState extends State<AudioWidget> {
                           listViewPodcastRecordList[listViewIndex];
                       return FlutterFlowAudioPlayer(
                         audio: Audio.network(
-                          listViewPodcastRecord.podcastpath,
+                          listViewPodcastRecord.podcastpath!,
                           metas: Metas(
-                            id: 'df3hg_-j7w08bvw',
+                            id: 'df3hg_-kcf3grh0',
                           ),
                         ),
                         titleTextStyle:

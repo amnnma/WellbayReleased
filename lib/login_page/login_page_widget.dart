@@ -10,21 +10,21 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginPageWidget extends StatefulWidget {
-  const LoginPageWidget({Key key}) : super(key: key);
+  const LoginPageWidget({Key? key}) : super(key: key);
 
   @override
   _LoginPageWidgetState createState() => _LoginPageWidgetState();
 }
 
 class _LoginPageWidgetState extends State<LoginPageWidget> {
-  TextEditingController emailAddressController;
-  TextEditingController passwordCreateController;
-  bool passwordCreateVisibility;
-  TextEditingController passwordConfirmController;
-  bool passwordConfirmVisibility;
-  TextEditingController emailAddressLoginController;
-  TextEditingController passwordLoginController;
-  bool passwordLoginVisibility;
+  TextEditingController? emailAddressController;
+  TextEditingController? passwordCreateController;
+  late bool passwordCreateVisibility;
+  TextEditingController? passwordConfirmController;
+  late bool passwordConfirmVisibility;
+  TextEditingController? emailAddressLoginController;
+  TextEditingController? passwordLoginController;
+  late bool passwordLoginVisibility;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -294,9 +294,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                                     final user =
                                                         await signInWithEmail(
                                                       context,
-                                                      emailAddressLoginController
+                                                      emailAddressLoginController!
                                                           .text,
-                                                      passwordLoginController
+                                                      passwordLoginController!
                                                           .text,
                                                     );
                                                     if (user == null) {
@@ -310,12 +310,12 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                                         builder: (context) =>
                                                             NavBarPage(
                                                                 initialPage:
-                                                                    'homePage'),
+                                                                    'homepagenew'),
                                                       ),
                                                       (r) => false,
                                                     );
                                                   },
-                                                  text: 'Login1',
+                                                  text: 'Login',
                                                   options: FFButtonOptions(
                                                     width: 230,
                                                     height: 60,
@@ -661,9 +661,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                                     final user =
                                                         await createAccountWithEmail(
                                                       context,
-                                                      emailAddressController
+                                                      emailAddressController!
                                                           .text,
-                                                      passwordCreateController
+                                                      passwordCreateController!
                                                           .text,
                                                     );
                                                     if (user == null) {

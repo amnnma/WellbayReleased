@@ -9,30 +9,36 @@ part 'video_record.g.dart';
 abstract class VideoRecord implements Built<VideoRecord, VideoRecordBuilder> {
   static Serializer<VideoRecord> get serializer => _$videoRecordSerializer;
 
-  @nullable
-  String get videoname;
+  String? get name;
 
-  @nullable
-  String get videourl;
+  String? get videoLink;
 
-  @nullable
+  String? get journalNoteText;
+
+  int? get index;
+
+  DocumentReference? get courseRef;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(VideoRecordBuilder builder) => builder
-    ..videoname = ''
-    ..videourl = '';
+    ..name = ''
+    ..videoLink = ''
+    ..journalNoteText = ''
+    ..index = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('video');
 
   static Stream<VideoRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<VideoRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   VideoRecord._();
   factory VideoRecord([void Function(VideoRecordBuilder) updates]) =
@@ -41,15 +47,27 @@ abstract class VideoRecord implements Built<VideoRecord, VideoRecordBuilder> {
   static VideoRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createVideoRecordData({
-  String videoname,
-  String videourl,
-}) =>
-    serializers.toFirestore(
-        VideoRecord.serializer,
-        VideoRecord((v) => v
-          ..videoname = videoname
-          ..videourl = videourl));
+  String? name,
+  String? videoLink,
+  String? journalNoteText,
+  int? index,
+  DocumentReference? courseRef,
+}) {
+  final firestoreData = serializers.toFirestore(
+    VideoRecord.serializer,
+    VideoRecord(
+      (v) => v
+        ..name = name
+        ..videoLink = videoLink
+        ..journalNoteText = journalNoteText
+        ..index = index
+        ..courseRef = courseRef,
+    ),
+  );
+
+  return firestoreData;
+}

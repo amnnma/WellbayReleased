@@ -7,14 +7,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ForgotPasswordWidget extends StatefulWidget {
-  const ForgotPasswordWidget({Key key}) : super(key: key);
+  const ForgotPasswordWidget({Key? key}) : super(key: key);
 
   @override
   _ForgotPasswordWidgetState createState() => _ForgotPasswordWidgetState();
 }
 
 class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
-  TextEditingController emailAddressController;
+  TextEditingController? emailAddressController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -116,7 +116,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
               child: FFButtonWidget(
                 onPressed: () async {
-                  if (emailAddressController.text.isEmpty) {
+                  if (emailAddressController!.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
@@ -127,7 +127,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget> {
                     return;
                   }
                   await resetPassword(
-                    email: emailAddressController.text,
+                    email: emailAddressController!.text,
                     context: context,
                   );
                 },

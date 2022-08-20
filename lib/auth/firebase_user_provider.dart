@@ -3,11 +3,11 @@ import 'package:rxdart/rxdart.dart';
 
 class WellbayFirebaseUser {
   WellbayFirebaseUser(this.user);
-  User user;
+  User? user;
   bool get loggedIn => user != null;
 }
 
-WellbayFirebaseUser currentUser;
+WellbayFirebaseUser? currentUser;
 bool get loggedIn => currentUser?.loggedIn ?? false;
 Stream<WellbayFirebaseUser> wellbayFirebaseUserStream() => FirebaseAuth.instance
     .authStateChanges()

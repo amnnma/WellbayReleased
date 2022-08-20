@@ -32,5 +32,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:437318263366:ios:619e9a9eb772d45b8ba047</string>
+	<key>DATABASE_URL</key>
+	<string>https://wellbay-fb3e4-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

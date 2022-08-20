@@ -11,12 +11,11 @@ abstract class UserSearchesRecord
   static Serializer<UserSearchesRecord> get serializer =>
       _$userSearchesRecordSerializer;
 
-  @nullable
-  String get searchText;
+  String? get searchText;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(UserSearchesRecordBuilder builder) =>
       builder..searchText = '';
@@ -26,11 +25,11 @@ abstract class UserSearchesRecord
 
   static Stream<UserSearchesRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<UserSearchesRecord> getDocumentOnce(DocumentReference ref) =>
       ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   UserSearchesRecord._();
   factory UserSearchesRecord(
@@ -40,11 +39,18 @@ abstract class UserSearchesRecord
   static UserSearchesRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createUserSearchesRecordData({
-  String searchText,
-}) =>
-    serializers.toFirestore(UserSearchesRecord.serializer,
-        UserSearchesRecord((u) => u..searchText = searchText));
+  String? searchText,
+}) {
+  final firestoreData = serializers.toFirestore(
+    UserSearchesRecord.serializer,
+    UserSearchesRecord(
+      (u) => u..searchText = searchText,
+    ),
+  );
+
+  return firestoreData;
+}

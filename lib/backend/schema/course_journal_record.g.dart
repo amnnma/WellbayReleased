@@ -20,18 +20,18 @@ class _$CourseJournalRecordSerializer
   final String wireName = 'CourseJournalRecord';
 
   @override
-  Iterable<Object> serialize(
+  Iterable<Object?> serialize(
       Serializers serializers, CourseJournalRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.userRef;
     if (value != null) {
       result
         ..add('userRef')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.courseRef;
     if (value != null) {
@@ -39,7 +39,7 @@ class _$CourseJournalRecordSerializer
         ..add('courseRef')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.question;
     if (value != null) {
@@ -62,58 +62,58 @@ class _$CourseJournalRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   CourseJournalRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CourseJournalRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'userRef':
           result.userRef = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'courseRef':
           result.courseRef = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'question':
           result.question = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'answer':
           result.answer = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'postTime':
           result.postTime = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
+              specifiedType: const FullType(DateTime)) as DateTime?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -124,20 +124,20 @@ class _$CourseJournalRecordSerializer
 
 class _$CourseJournalRecord extends CourseJournalRecord {
   @override
-  final DocumentReference<Object> userRef;
+  final DocumentReference<Object?>? userRef;
   @override
-  final DocumentReference<Object> courseRef;
+  final DocumentReference<Object?>? courseRef;
   @override
-  final String question;
+  final String? question;
   @override
-  final String answer;
+  final String? answer;
   @override
-  final DateTime postTime;
+  final DateTime? postTime;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
   factory _$CourseJournalRecord(
-          [void Function(CourseJournalRecordBuilder) updates]) =>
+          [void Function(CourseJournalRecordBuilder)? updates]) =>
       (new CourseJournalRecordBuilder()..update(updates))._build();
 
   _$CourseJournalRecord._(
@@ -146,7 +146,7 @@ class _$CourseJournalRecord extends CourseJournalRecord {
       this.question,
       this.answer,
       this.postTime,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -167,7 +167,7 @@ class _$CourseJournalRecord extends CourseJournalRecord {
         question == other.question &&
         answer == other.answer &&
         postTime == other.postTime &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -179,7 +179,7 @@ class _$CourseJournalRecord extends CourseJournalRecord {
                     question.hashCode),
                 answer.hashCode),
             postTime.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -190,40 +190,39 @@ class _$CourseJournalRecord extends CourseJournalRecord {
           ..add('question', question)
           ..add('answer', answer)
           ..add('postTime', postTime)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class CourseJournalRecordBuilder
     implements Builder<CourseJournalRecord, CourseJournalRecordBuilder> {
-  _$CourseJournalRecord _$v;
+  _$CourseJournalRecord? _$v;
 
-  DocumentReference<Object> _userRef;
-  DocumentReference<Object> get userRef => _$this._userRef;
-  set userRef(DocumentReference<Object> userRef) => _$this._userRef = userRef;
+  DocumentReference<Object?>? _userRef;
+  DocumentReference<Object?>? get userRef => _$this._userRef;
+  set userRef(DocumentReference<Object?>? userRef) => _$this._userRef = userRef;
 
-  DocumentReference<Object> _courseRef;
-  DocumentReference<Object> get courseRef => _$this._courseRef;
-  set courseRef(DocumentReference<Object> courseRef) =>
+  DocumentReference<Object?>? _courseRef;
+  DocumentReference<Object?>? get courseRef => _$this._courseRef;
+  set courseRef(DocumentReference<Object?>? courseRef) =>
       _$this._courseRef = courseRef;
 
-  String _question;
-  String get question => _$this._question;
-  set question(String question) => _$this._question = question;
+  String? _question;
+  String? get question => _$this._question;
+  set question(String? question) => _$this._question = question;
 
-  String _answer;
-  String get answer => _$this._answer;
-  set answer(String answer) => _$this._answer = answer;
+  String? _answer;
+  String? get answer => _$this._answer;
+  set answer(String? answer) => _$this._answer = answer;
 
-  DateTime _postTime;
-  DateTime get postTime => _$this._postTime;
-  set postTime(DateTime postTime) => _$this._postTime = postTime;
+  DateTime? _postTime;
+  DateTime? get postTime => _$this._postTime;
+  set postTime(DateTime? postTime) => _$this._postTime = postTime;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   CourseJournalRecordBuilder() {
     CourseJournalRecord._initializeBuilder(this);
@@ -237,7 +236,7 @@ class CourseJournalRecordBuilder
       _question = $v.question;
       _answer = $v.answer;
       _postTime = $v.postTime;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -250,7 +249,7 @@ class CourseJournalRecordBuilder
   }
 
   @override
-  void update(void Function(CourseJournalRecordBuilder) updates) {
+  void update(void Function(CourseJournalRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -265,7 +264,7 @@ class CourseJournalRecordBuilder
             question: question,
             answer: answer,
             postTime: postTime,
-            reference: reference);
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

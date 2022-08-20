@@ -10,18 +10,15 @@ abstract class AuthorsRecord
     implements Built<AuthorsRecord, AuthorsRecordBuilder> {
   static Serializer<AuthorsRecord> get serializer => _$authorsRecordSerializer;
 
-  @nullable
-  String get name;
+  String? get name;
 
-  @nullable
-  String get profileImage;
+  String? get profileImage;
 
-  @nullable
-  String get description;
+  String? get description;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(AuthorsRecordBuilder builder) => builder
     ..name = ''
@@ -33,11 +30,11 @@ abstract class AuthorsRecord
 
   static Stream<AuthorsRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<AuthorsRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   AuthorsRecord._();
   factory AuthorsRecord([void Function(AuthorsRecordBuilder) updates]) =
@@ -46,17 +43,23 @@ abstract class AuthorsRecord
   static AuthorsRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createAuthorsRecordData({
-  String name,
-  String profileImage,
-  String description,
-}) =>
-    serializers.toFirestore(
-        AuthorsRecord.serializer,
-        AuthorsRecord((a) => a
-          ..name = name
-          ..profileImage = profileImage
-          ..description = description));
+  String? name,
+  String? profileImage,
+  String? description,
+}) {
+  final firestoreData = serializers.toFirestore(
+    AuthorsRecord.serializer,
+    AuthorsRecord(
+      (a) => a
+        ..name = name
+        ..profileImage = profileImage
+        ..description = description,
+    ),
+  );
+
+  return firestoreData;
+}

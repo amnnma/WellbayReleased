@@ -17,7 +17,7 @@ class FFAppState {
     _podcastplay = prefs.getString('ff_podcastplay') ?? _podcastplay;
   }
 
-  SharedPreferences prefs;
+  late SharedPreferences prefs;
 
   String _podcastplay = '';
   String get podcastplay => _podcastplay;
@@ -27,7 +27,7 @@ class FFAppState {
   }
 }
 
-LatLng _latLngFromString(String val) {
+LatLng? _latLngFromString(String? val) {
   if (val == null) {
     return null;
   }

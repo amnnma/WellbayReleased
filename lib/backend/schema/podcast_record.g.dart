@@ -16,10 +16,10 @@ class _$PodcastRecordSerializer implements StructuredSerializer<PodcastRecord> {
   final String wireName = 'PodcastRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, PodcastRecord object,
+  Iterable<Object?> serialize(Serializers serializers, PodcastRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.podcastid;
     if (value != null) {
       result
@@ -46,7 +46,7 @@ class _$PodcastRecordSerializer implements StructuredSerializer<PodcastRecord> {
         ..add('Person')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     value = object.podcastImage;
     if (value != null) {
@@ -62,71 +62,121 @@ class _$PodcastRecordSerializer implements StructuredSerializer<PodcastRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.userRef;
+    if (value != null) {
+      result
+        ..add('userRef')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(
+                DocumentReference, const [const FullType.nullable(Object)])));
+    }
+    value = object.lastUpdated;
+    if (value != null) {
+      result
+        ..add('lastUpdated')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
+    value = object.video;
+    if (value != null) {
+      result
+        ..add('video')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.podcastdescription;
+    if (value != null) {
+      result
+        ..add('podcastdescription')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.podcastType;
     if (value != null) {
       result
         ..add('podcastType')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(String)])));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   PodcastRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new PodcastRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'podcastid':
           result.podcastid = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'podcasttitle':
           result.podcasttitle = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'podcastpath':
           result.podcastpath = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'Person':
           result.person = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
         case 'podcastImage':
           result.podcastImage = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'podcastCreatename':
           result.podcastCreatename = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'userRef':
+          result.userRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
+          break;
+        case 'lastUpdated':
+          result.lastUpdated = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime?;
+          break;
+        case 'video':
+          result.video = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'podcastdescription':
+          result.podcastdescription = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'podcastType':
-          result.podcastType = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+          result.podcastType.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(String)]))!
+              as BuiltList<Object?>);
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -137,23 +187,31 @@ class _$PodcastRecordSerializer implements StructuredSerializer<PodcastRecord> {
 
 class _$PodcastRecord extends PodcastRecord {
   @override
-  final int podcastid;
+  final int? podcastid;
   @override
-  final String podcasttitle;
+  final String? podcasttitle;
   @override
-  final String podcastpath;
+  final String? podcastpath;
   @override
-  final DocumentReference<Object> person;
+  final DocumentReference<Object?>? person;
   @override
-  final String podcastImage;
+  final String? podcastImage;
   @override
-  final String podcastCreatename;
+  final String? podcastCreatename;
   @override
-  final String podcastType;
+  final DocumentReference<Object?>? userRef;
   @override
-  final DocumentReference<Object> reference;
+  final DateTime? lastUpdated;
+  @override
+  final String? video;
+  @override
+  final String? podcastdescription;
+  @override
+  final BuiltList<String>? podcastType;
+  @override
+  final DocumentReference<Object?>? ffRef;
 
-  factory _$PodcastRecord([void Function(PodcastRecordBuilder) updates]) =>
+  factory _$PodcastRecord([void Function(PodcastRecordBuilder)? updates]) =>
       (new PodcastRecordBuilder()..update(updates))._build();
 
   _$PodcastRecord._(
@@ -163,8 +221,12 @@ class _$PodcastRecord extends PodcastRecord {
       this.person,
       this.podcastImage,
       this.podcastCreatename,
+      this.userRef,
+      this.lastUpdated,
+      this.video,
+      this.podcastdescription,
       this.podcastType,
-      this.reference})
+      this.ffRef})
       : super._();
 
   @override
@@ -184,8 +246,12 @@ class _$PodcastRecord extends PodcastRecord {
         person == other.person &&
         podcastImage == other.podcastImage &&
         podcastCreatename == other.podcastCreatename &&
+        userRef == other.userRef &&
+        lastUpdated == other.lastUpdated &&
+        video == other.video &&
+        podcastdescription == other.podcastdescription &&
         podcastType == other.podcastType &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -196,14 +262,22 @@ class _$PodcastRecord extends PodcastRecord {
                 $jc(
                     $jc(
                         $jc(
-                            $jc($jc(0, podcastid.hashCode),
-                                podcasttitle.hashCode),
-                            podcastpath.hashCode),
-                        person.hashCode),
-                    podcastImage.hashCode),
-                podcastCreatename.hashCode),
+                            $jc(
+                                $jc(
+                                    $jc(
+                                        $jc(
+                                            $jc($jc(0, podcastid.hashCode),
+                                                podcasttitle.hashCode),
+                                            podcastpath.hashCode),
+                                        person.hashCode),
+                                    podcastImage.hashCode),
+                                podcastCreatename.hashCode),
+                            userRef.hashCode),
+                        lastUpdated.hashCode),
+                    video.hashCode),
+                podcastdescription.hashCode),
             podcastType.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -215,49 +289,71 @@ class _$PodcastRecord extends PodcastRecord {
           ..add('person', person)
           ..add('podcastImage', podcastImage)
           ..add('podcastCreatename', podcastCreatename)
+          ..add('userRef', userRef)
+          ..add('lastUpdated', lastUpdated)
+          ..add('video', video)
+          ..add('podcastdescription', podcastdescription)
           ..add('podcastType', podcastType)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class PodcastRecordBuilder
     implements Builder<PodcastRecord, PodcastRecordBuilder> {
-  _$PodcastRecord _$v;
+  _$PodcastRecord? _$v;
 
-  int _podcastid;
-  int get podcastid => _$this._podcastid;
-  set podcastid(int podcastid) => _$this._podcastid = podcastid;
+  int? _podcastid;
+  int? get podcastid => _$this._podcastid;
+  set podcastid(int? podcastid) => _$this._podcastid = podcastid;
 
-  String _podcasttitle;
-  String get podcasttitle => _$this._podcasttitle;
-  set podcasttitle(String podcasttitle) => _$this._podcasttitle = podcasttitle;
+  String? _podcasttitle;
+  String? get podcasttitle => _$this._podcasttitle;
+  set podcasttitle(String? podcasttitle) => _$this._podcasttitle = podcasttitle;
 
-  String _podcastpath;
-  String get podcastpath => _$this._podcastpath;
-  set podcastpath(String podcastpath) => _$this._podcastpath = podcastpath;
+  String? _podcastpath;
+  String? get podcastpath => _$this._podcastpath;
+  set podcastpath(String? podcastpath) => _$this._podcastpath = podcastpath;
 
-  DocumentReference<Object> _person;
-  DocumentReference<Object> get person => _$this._person;
-  set person(DocumentReference<Object> person) => _$this._person = person;
+  DocumentReference<Object?>? _person;
+  DocumentReference<Object?>? get person => _$this._person;
+  set person(DocumentReference<Object?>? person) => _$this._person = person;
 
-  String _podcastImage;
-  String get podcastImage => _$this._podcastImage;
-  set podcastImage(String podcastImage) => _$this._podcastImage = podcastImage;
+  String? _podcastImage;
+  String? get podcastImage => _$this._podcastImage;
+  set podcastImage(String? podcastImage) => _$this._podcastImage = podcastImage;
 
-  String _podcastCreatename;
-  String get podcastCreatename => _$this._podcastCreatename;
-  set podcastCreatename(String podcastCreatename) =>
+  String? _podcastCreatename;
+  String? get podcastCreatename => _$this._podcastCreatename;
+  set podcastCreatename(String? podcastCreatename) =>
       _$this._podcastCreatename = podcastCreatename;
 
-  String _podcastType;
-  String get podcastType => _$this._podcastType;
-  set podcastType(String podcastType) => _$this._podcastType = podcastType;
+  DocumentReference<Object?>? _userRef;
+  DocumentReference<Object?>? get userRef => _$this._userRef;
+  set userRef(DocumentReference<Object?>? userRef) => _$this._userRef = userRef;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DateTime? _lastUpdated;
+  DateTime? get lastUpdated => _$this._lastUpdated;
+  set lastUpdated(DateTime? lastUpdated) => _$this._lastUpdated = lastUpdated;
+
+  String? _video;
+  String? get video => _$this._video;
+  set video(String? video) => _$this._video = video;
+
+  String? _podcastdescription;
+  String? get podcastdescription => _$this._podcastdescription;
+  set podcastdescription(String? podcastdescription) =>
+      _$this._podcastdescription = podcastdescription;
+
+  ListBuilder<String>? _podcastType;
+  ListBuilder<String> get podcastType =>
+      _$this._podcastType ??= new ListBuilder<String>();
+  set podcastType(ListBuilder<String>? podcastType) =>
+      _$this._podcastType = podcastType;
+
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   PodcastRecordBuilder() {
     PodcastRecord._initializeBuilder(this);
@@ -272,8 +368,12 @@ class PodcastRecordBuilder
       _person = $v.person;
       _podcastImage = $v.podcastImage;
       _podcastCreatename = $v.podcastCreatename;
-      _podcastType = $v.podcastType;
-      _reference = $v.reference;
+      _userRef = $v.userRef;
+      _lastUpdated = $v.lastUpdated;
+      _video = $v.video;
+      _podcastdescription = $v.podcastdescription;
+      _podcastType = $v.podcastType?.toBuilder();
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -286,7 +386,7 @@ class PodcastRecordBuilder
   }
 
   @override
-  void update(void Function(PodcastRecordBuilder) updates) {
+  void update(void Function(PodcastRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -294,16 +394,33 @@ class PodcastRecordBuilder
   PodcastRecord build() => _build();
 
   _$PodcastRecord _build() {
-    final _$result = _$v ??
-        new _$PodcastRecord._(
-            podcastid: podcastid,
-            podcasttitle: podcasttitle,
-            podcastpath: podcastpath,
-            person: person,
-            podcastImage: podcastImage,
-            podcastCreatename: podcastCreatename,
-            podcastType: podcastType,
-            reference: reference);
+    _$PodcastRecord _$result;
+    try {
+      _$result = _$v ??
+          new _$PodcastRecord._(
+              podcastid: podcastid,
+              podcasttitle: podcasttitle,
+              podcastpath: podcastpath,
+              person: person,
+              podcastImage: podcastImage,
+              podcastCreatename: podcastCreatename,
+              userRef: userRef,
+              lastUpdated: lastUpdated,
+              video: video,
+              podcastdescription: podcastdescription,
+              podcastType: _podcastType?.build(),
+              ffRef: ffRef);
+    } catch (_) {
+      late String _$failedField;
+      try {
+        _$failedField = 'podcastType';
+        _podcastType?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            r'PodcastRecord', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

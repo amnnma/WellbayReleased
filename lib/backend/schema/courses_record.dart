@@ -10,41 +10,31 @@ abstract class CoursesRecord
     implements Built<CoursesRecord, CoursesRecordBuilder> {
   static Serializer<CoursesRecord> get serializer => _$coursesRecordSerializer;
 
-  @nullable
-  String get courseName;
+  String? get courseName;
 
-  @nullable
-  BuiltList<DocumentReference> get videoRef;
+  BuiltList<DocumentReference>? get videoRef;
 
-  @nullable
-  String get courseImage;
+  String? get courseImage;
 
-  @nullable
-  int get courseType;
+  int? get courseType;
 
-  @nullable
-  BuiltList<DocumentReference> get authorsRef;
+  BuiltList<DocumentReference>? get authorsRef;
 
-  @nullable
   @BuiltValueField(wireName: 'WhatLearn')
-  bool get whatLearn;
+  bool? get whatLearn;
 
-  @nullable
   @BuiltValueField(wireName: 'HowWork')
-  bool get howWork;
+  bool? get howWork;
 
-  @nullable
-  int get courseLength;
+  int? get courseLength;
 
-  @nullable
-  int get numberOfLessons;
+  int? get numberOfLessons;
 
-  @nullable
-  String get courseEntryImage;
+  String? get courseEntryImage;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(CoursesRecordBuilder builder) => builder
     ..courseName = ''
@@ -63,11 +53,11 @@ abstract class CoursesRecord
 
   static Stream<CoursesRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<CoursesRecord> getDocumentOnce(DocumentReference ref) => ref
       .get()
-      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   CoursesRecord._();
   factory CoursesRecord([void Function(CoursesRecordBuilder) updates]) =
@@ -76,29 +66,35 @@ abstract class CoursesRecord
   static CoursesRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createCoursesRecordData({
-  String courseName,
-  String courseImage,
-  int courseType,
-  bool whatLearn,
-  bool howWork,
-  int courseLength,
-  int numberOfLessons,
-  String courseEntryImage,
-}) =>
-    serializers.toFirestore(
-        CoursesRecord.serializer,
-        CoursesRecord((c) => c
-          ..courseName = courseName
-          ..videoRef = null
-          ..courseImage = courseImage
-          ..courseType = courseType
-          ..authorsRef = null
-          ..whatLearn = whatLearn
-          ..howWork = howWork
-          ..courseLength = courseLength
-          ..numberOfLessons = numberOfLessons
-          ..courseEntryImage = courseEntryImage));
+  String? courseName,
+  String? courseImage,
+  int? courseType,
+  bool? whatLearn,
+  bool? howWork,
+  int? courseLength,
+  int? numberOfLessons,
+  String? courseEntryImage,
+}) {
+  final firestoreData = serializers.toFirestore(
+    CoursesRecord.serializer,
+    CoursesRecord(
+      (c) => c
+        ..courseName = courseName
+        ..videoRef = null
+        ..courseImage = courseImage
+        ..courseType = courseType
+        ..authorsRef = null
+        ..whatLearn = whatLearn
+        ..howWork = howWork
+        ..courseLength = courseLength
+        ..numberOfLessons = numberOfLessons
+        ..courseEntryImage = courseEntryImage,
+    ),
+  );
+
+  return firestoreData;
+}

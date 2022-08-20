@@ -11,19 +11,16 @@ abstract class GratitudeJournalRecord
   static Serializer<GratitudeJournalRecord> get serializer =>
       _$gratitudeJournalRecordSerializer;
 
-  @nullable
-  DocumentReference get userRef;
+  DocumentReference? get userRef;
 
-  @nullable
   @BuiltValueField(wireName: 'EntryText')
-  String get entryText;
+  String? get entryText;
 
-  @nullable
-  DateTime get postTime;
+  DateTime? get postTime;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(GratitudeJournalRecordBuilder builder) =>
       builder..entryText = '';
@@ -33,12 +30,12 @@ abstract class GratitudeJournalRecord
 
   static Stream<GratitudeJournalRecord> getDocument(DocumentReference ref) =>
       ref.snapshots().map(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<GratitudeJournalRecord> getDocumentOnce(
           DocumentReference ref) =>
       ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   GratitudeJournalRecord._();
   factory GratitudeJournalRecord(
@@ -48,17 +45,23 @@ abstract class GratitudeJournalRecord
   static GratitudeJournalRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createGratitudeJournalRecordData({
-  DocumentReference userRef,
-  String entryText,
-  DateTime postTime,
-}) =>
-    serializers.toFirestore(
-        GratitudeJournalRecord.serializer,
-        GratitudeJournalRecord((g) => g
-          ..userRef = userRef
-          ..entryText = entryText
-          ..postTime = postTime));
+  DocumentReference? userRef,
+  String? entryText,
+  DateTime? postTime,
+}) {
+  final firestoreData = serializers.toFirestore(
+    GratitudeJournalRecord.serializer,
+    GratitudeJournalRecord(
+      (g) => g
+        ..userRef = userRef
+        ..entryText = entryText
+        ..postTime = postTime,
+    ),
+  );
+
+  return firestoreData;
+}

@@ -15,11 +15,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ProfilePageWidget extends StatefulWidget {
   const ProfilePageWidget({
-    Key key,
+    Key? key,
     this.userProfile,
   }) : super(key: key);
 
-  final DocumentReference userProfile;
+  final DocumentReference? userProfile;
 
   @override
   _ProfilePageWidgetState createState() => _ProfilePageWidgetState();
@@ -58,7 +58,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<UsersRecord>(
-      stream: UsersRecord.getDocument(currentUserReference),
+      stream: UsersRecord.getDocument(currentUserReference!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -73,7 +73,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
             ),
           );
         }
-        final profilePageUsersRecord = snapshot.data;
+        final profilePageUsersRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).textColor,
@@ -88,7 +88,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                       width: MediaQuery.of(context).size.width,
                       height: 360,
                       decoration: BoxDecoration(
-                        color: Color(0xFF8E97FD),
+                        color: Color(0xFFA9A8A7),
                       ),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
@@ -115,7 +115,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           2, 2, 2, 2),
                                       child: Hero(
-                                        tag: profilePageUsersRecord.photoUrl,
+                                        tag: profilePageUsersRecord.photoUrl!,
                                         transitionOnUserGestures: true,
                                         child: Container(
                                           width: 60,
@@ -125,8 +125,8 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                             shape: BoxShape.circle,
                                           ),
                                           child: CachedNetworkImage(
-                                            imageUrl:
-                                                profilePageUsersRecord.photoUrl,
+                                            imageUrl: profilePageUsersRecord
+                                                .photoUrl!,
                                           ),
                                         ),
                                       ),
@@ -238,14 +238,14 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Text(
-                                    profilePageUsersRecord.displayName,
+                                    profilePageUsersRecord.displayName!,
                                     style: FlutterFlowTheme.of(context).title3,
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         4, 0, 0, 0),
                                     child: Text(
-                                      profilePageUsersRecord.age.toString(),
+                                      profilePageUsersRecord.age!.toString(),
                                       style: FlutterFlowTheme.of(context)
                                           .subtitle2,
                                     ),
@@ -260,7 +260,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 8, 0, 0),
                                   child: Text(
-                                    profilePageUsersRecord.email,
+                                    profilePageUsersRecord.email!,
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
@@ -296,7 +296,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                                 children: [
                                   Expanded(
                                     child: AutoSizeText(
-                                      profilePageUsersRecord.ailments,
+                                      profilePageUsersRecord.ailments!,
                                       style:
                                           FlutterFlowTheme.of(context).title3,
                                     ),
@@ -379,7 +379,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                             );
                           }
                           List<AppointmentsRecord>
-                              listViewAppointmentsRecordList = snapshot.data;
+                              listViewAppointmentsRecordList = snapshot.data!;
                           return ListView.builder(
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
@@ -509,7 +509,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget>
                               );
                             },
                           ).animated(
-                              [animationsMap['listViewOnPageLoadAnimation']]);
+                              [animationsMap['listViewOnPageLoadAnimation']!]);
                         },
                       ),
                     ),

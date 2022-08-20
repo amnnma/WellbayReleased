@@ -16,10 +16,10 @@ class _$AuthorsRecordSerializer implements StructuredSerializer<AuthorsRecord> {
   final String wireName = 'AuthorsRecord';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, AuthorsRecord object,
+  Iterable<Object?> serialize(Serializers serializers, AuthorsRecord object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[];
-    Object value;
+    final result = <Object?>[];
+    Object? value;
     value = object.name;
     if (value != null) {
       result
@@ -41,46 +41,46 @@ class _$AuthorsRecordSerializer implements StructuredSerializer<AuthorsRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
-    value = object.reference;
+    value = object.ffRef;
     if (value != null) {
       result
         ..add('Document__Reference__Field')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+                DocumentReference, const [const FullType.nullable(Object)])));
     }
     return result;
   }
 
   @override
   AuthorsRecord deserialize(
-      Serializers serializers, Iterable<Object> serialized,
+      Serializers serializers, Iterable<Object?> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new AuthorsRecordBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
-      final Object value = iterator.current;
+      final Object? value = iterator.current;
       switch (key) {
         case 'name':
           result.name = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'profileImage':
           result.profileImage = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'description':
           result.description = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String)) as String?;
           break;
         case 'Document__Reference__Field':
-          result.reference = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+          result.ffRef = serializers.deserialize(value,
+              specifiedType: const FullType(DocumentReference, const [
+                const FullType.nullable(Object)
+              ])) as DocumentReference<Object?>?;
           break;
       }
     }
@@ -91,19 +91,19 @@ class _$AuthorsRecordSerializer implements StructuredSerializer<AuthorsRecord> {
 
 class _$AuthorsRecord extends AuthorsRecord {
   @override
-  final String name;
+  final String? name;
   @override
-  final String profileImage;
+  final String? profileImage;
   @override
-  final String description;
+  final String? description;
   @override
-  final DocumentReference<Object> reference;
+  final DocumentReference<Object?>? ffRef;
 
-  factory _$AuthorsRecord([void Function(AuthorsRecordBuilder) updates]) =>
+  factory _$AuthorsRecord([void Function(AuthorsRecordBuilder)? updates]) =>
       (new AuthorsRecordBuilder()..update(updates))._build();
 
   _$AuthorsRecord._(
-      {this.name, this.profileImage, this.description, this.reference})
+      {this.name, this.profileImage, this.description, this.ffRef})
       : super._();
 
   @override
@@ -120,7 +120,7 @@ class _$AuthorsRecord extends AuthorsRecord {
         name == other.name &&
         profileImage == other.profileImage &&
         description == other.description &&
-        reference == other.reference;
+        ffRef == other.ffRef;
   }
 
   @override
@@ -128,7 +128,7 @@ class _$AuthorsRecord extends AuthorsRecord {
     return $jf($jc(
         $jc($jc($jc(0, name.hashCode), profileImage.hashCode),
             description.hashCode),
-        reference.hashCode));
+        ffRef.hashCode));
   }
 
   @override
@@ -137,31 +137,30 @@ class _$AuthorsRecord extends AuthorsRecord {
           ..add('name', name)
           ..add('profileImage', profileImage)
           ..add('description', description)
-          ..add('reference', reference))
+          ..add('ffRef', ffRef))
         .toString();
   }
 }
 
 class AuthorsRecordBuilder
     implements Builder<AuthorsRecord, AuthorsRecordBuilder> {
-  _$AuthorsRecord _$v;
+  _$AuthorsRecord? _$v;
 
-  String _name;
-  String get name => _$this._name;
-  set name(String name) => _$this._name = name;
+  String? _name;
+  String? get name => _$this._name;
+  set name(String? name) => _$this._name = name;
 
-  String _profileImage;
-  String get profileImage => _$this._profileImage;
-  set profileImage(String profileImage) => _$this._profileImage = profileImage;
+  String? _profileImage;
+  String? get profileImage => _$this._profileImage;
+  set profileImage(String? profileImage) => _$this._profileImage = profileImage;
 
-  String _description;
-  String get description => _$this._description;
-  set description(String description) => _$this._description = description;
+  String? _description;
+  String? get description => _$this._description;
+  set description(String? description) => _$this._description = description;
 
-  DocumentReference<Object> _reference;
-  DocumentReference<Object> get reference => _$this._reference;
-  set reference(DocumentReference<Object> reference) =>
-      _$this._reference = reference;
+  DocumentReference<Object?>? _ffRef;
+  DocumentReference<Object?>? get ffRef => _$this._ffRef;
+  set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
 
   AuthorsRecordBuilder() {
     AuthorsRecord._initializeBuilder(this);
@@ -173,7 +172,7 @@ class AuthorsRecordBuilder
       _name = $v.name;
       _profileImage = $v.profileImage;
       _description = $v.description;
-      _reference = $v.reference;
+      _ffRef = $v.ffRef;
       _$v = null;
     }
     return this;
@@ -186,7 +185,7 @@ class AuthorsRecordBuilder
   }
 
   @override
-  void update(void Function(AuthorsRecordBuilder) updates) {
+  void update(void Function(AuthorsRecordBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
@@ -199,7 +198,7 @@ class AuthorsRecordBuilder
             name: name,
             profileImage: profileImage,
             description: description,
-            reference: reference);
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }

@@ -12,21 +12,21 @@ import 'package:google_fonts/google_fonts.dart';
 
 class EditProfileWidget extends StatefulWidget {
   const EditProfileWidget({
-    Key key,
+    Key? key,
     this.userProfile,
   }) : super(key: key);
 
-  final DocumentReference userProfile;
+  final DocumentReference? userProfile;
 
   @override
   _EditProfileWidgetState createState() => _EditProfileWidgetState();
 }
 
 class _EditProfileWidgetState extends State<EditProfileWidget> {
-  String radioButtonValue;
-  TextEditingController yourAgeController;
-  TextEditingController yourEmailController;
-  TextEditingController yourNameController;
+  String? radioButtonValue;
+  TextEditingController? yourAgeController;
+  TextEditingController? yourEmailController;
+  TextEditingController? yourNameController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -38,7 +38,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<UsersRecord>(
-      stream: UsersRecord.getDocument(widget.userProfile),
+      stream: UsersRecord.getDocument(widget.userProfile!),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -53,7 +53,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
             ),
           );
         }
-        final editProfileUsersRecord = snapshot.data;
+        final editProfileUsersRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -108,7 +108,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         shape: BoxShape.circle,
                       ),
                       child: Image.network(
-                        editProfileUsersRecord.photoUrl,
+                        editProfileUsersRecord.photoUrl!,
                       ),
                     ),
                   ),
@@ -308,7 +308,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 ),
                               );
                             }
-                            final radioButtonUsersRecord = snapshot.data;
+                            final radioButtonUsersRecord = snapshot.data!;
                             return FlutterFlowRadioButton(
                               options:
                                   ['Male', 'Female', 'Undisclosed'].toList(),
@@ -345,7 +345,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       onPressed: () async {
                         final usersUpdateData = createUsersRecordData(
                           displayName: yourNameController?.text ?? '',
-                          email: yourEmailController.text,
+                          email: yourEmailController!.text,
                           age: int.parse(yourAgeController?.text ?? ''),
                           userSex: editProfileUsersRecord.userSex,
                         );

@@ -9,14 +9,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class Quiz11Widget extends StatefulWidget {
-  const Quiz11Widget({Key key}) : super(key: key);
+  const Quiz11Widget({Key? key}) : super(key: key);
 
   @override
   _Quiz11WidgetState createState() => _Quiz11WidgetState();
 }
 
 class _Quiz11WidgetState extends State<Quiz11Widget> {
-  double sliderValue;
+  double? sliderValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override

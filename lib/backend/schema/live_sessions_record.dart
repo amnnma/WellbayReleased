@@ -11,39 +11,29 @@ abstract class LiveSessionsRecord
   static Serializer<LiveSessionsRecord> get serializer =>
       _$liveSessionsRecordSerializer;
 
-  @nullable
-  String get sessionName;
+  String? get sessionName;
 
-  @nullable
-  String get sessionDescription;
+  String? get sessionDescription;
 
-  @nullable
-  String get sessionTherapist;
+  String? get sessionTherapist;
 
-  @nullable
-  String get sessionHowPrepare;
+  String? get sessionHowPrepare;
 
-  @nullable
-  String get sessionScienceBehind;
+  String? get sessionScienceBehind;
 
-  @nullable
-  String get sessionAgenda;
+  String? get sessionAgenda;
 
-  @nullable
-  String get sessionZoomLink;
+  String? get sessionZoomLink;
 
-  @nullable
-  String get sessionImage;
+  String? get sessionImage;
 
-  @nullable
-  int get sessionLengthMinutes;
+  int? get sessionLengthMinutes;
 
-  @nullable
-  String get sessionImageEntry;
+  String? get sessionImageEntry;
 
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
-  DocumentReference get reference;
+  DocumentReference? get ffRef;
+  DocumentReference get reference => ffRef!;
 
   static void _initializeBuilder(LiveSessionsRecordBuilder builder) => builder
     ..sessionName = ''
@@ -62,11 +52,11 @@ abstract class LiveSessionsRecord
 
   static Stream<LiveSessionsRecord> getDocument(DocumentReference ref) => ref
       .snapshots()
-      .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
+      .map((s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   static Future<LiveSessionsRecord> getDocumentOnce(DocumentReference ref) =>
       ref.get().then(
-          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+          (s) => serializers.deserializeWith(serializer, serializedData(s))!);
 
   LiveSessionsRecord._();
   factory LiveSessionsRecord(
@@ -76,31 +66,37 @@ abstract class LiveSessionsRecord
   static LiveSessionsRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
       serializers.deserializeWith(serializer,
-          {...mapFromFirestore(data), kDocumentReferenceField: reference});
+          {...mapFromFirestore(data), kDocumentReferenceField: reference})!;
 }
 
 Map<String, dynamic> createLiveSessionsRecordData({
-  String sessionName,
-  String sessionDescription,
-  String sessionTherapist,
-  String sessionHowPrepare,
-  String sessionScienceBehind,
-  String sessionAgenda,
-  String sessionZoomLink,
-  String sessionImage,
-  int sessionLengthMinutes,
-  String sessionImageEntry,
-}) =>
-    serializers.toFirestore(
-        LiveSessionsRecord.serializer,
-        LiveSessionsRecord((l) => l
-          ..sessionName = sessionName
-          ..sessionDescription = sessionDescription
-          ..sessionTherapist = sessionTherapist
-          ..sessionHowPrepare = sessionHowPrepare
-          ..sessionScienceBehind = sessionScienceBehind
-          ..sessionAgenda = sessionAgenda
-          ..sessionZoomLink = sessionZoomLink
-          ..sessionImage = sessionImage
-          ..sessionLengthMinutes = sessionLengthMinutes
-          ..sessionImageEntry = sessionImageEntry));
+  String? sessionName,
+  String? sessionDescription,
+  String? sessionTherapist,
+  String? sessionHowPrepare,
+  String? sessionScienceBehind,
+  String? sessionAgenda,
+  String? sessionZoomLink,
+  String? sessionImage,
+  int? sessionLengthMinutes,
+  String? sessionImageEntry,
+}) {
+  final firestoreData = serializers.toFirestore(
+    LiveSessionsRecord.serializer,
+    LiveSessionsRecord(
+      (l) => l
+        ..sessionName = sessionName
+        ..sessionDescription = sessionDescription
+        ..sessionTherapist = sessionTherapist
+        ..sessionHowPrepare = sessionHowPrepare
+        ..sessionScienceBehind = sessionScienceBehind
+        ..sessionAgenda = sessionAgenda
+        ..sessionZoomLink = sessionZoomLink
+        ..sessionImage = sessionImage
+        ..sessionLengthMinutes = sessionLengthMinutes
+        ..sessionImageEntry = sessionImageEntry,
+    ),
+  );
+
+  return firestoreData;
+}

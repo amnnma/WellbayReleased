@@ -8,7 +8,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyAppointmentsWidget extends StatefulWidget {
-  const MyAppointmentsWidget({Key key}) : super(key: key);
+  const MyAppointmentsWidget({Key? key}) : super(key: key);
 
   @override
   _MyAppointmentsWidgetState createState() => _MyAppointmentsWidgetState();
@@ -94,7 +94,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
                     );
                   }
                   List<AppointmentsRecord> listViewAppointmentsRecordList =
-                      snapshot.data;
+                      snapshot.data!;
                   if (listViewAppointmentsRecordList.isEmpty) {
                     return Center(
                       child: Image.asset(
@@ -130,7 +130,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
                               );
                             }
                             final appointmentCardAppointmentsRecord =
-                                snapshot.data;
+                                snapshot.data!;
                             return InkWell(
                               onTap: () async {
                                 await Navigator.push(
@@ -176,7 +176,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
                                                     .fromSTEB(4, 0, 0, 0),
                                                 child: Text(
                                                   listViewAppointmentsRecord
-                                                      .appointmentType,
+                                                      .appointmentType!,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .title3,
@@ -214,7 +214,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
                                                     dateTimeFormat(
                                                         'MMMMEEEEd',
                                                         listViewAppointmentsRecord
-                                                            .appointmentTime),
+                                                            .appointmentTime!),
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText1
@@ -244,7 +244,7 @@ class _MyAppointmentsWidgetState extends State<MyAppointmentsWidget> {
                                                       .fromSTEB(4, 0, 0, 0),
                                                   child: Text(
                                                     listViewAppointmentsRecord
-                                                        .appointmentName,
+                                                        .appointmentName!,
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText1
